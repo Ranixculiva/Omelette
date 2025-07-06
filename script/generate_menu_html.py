@@ -142,6 +142,8 @@ def main():
 
     # Extract menu item template
     item_template = extract_menu_item_template(template)
+    # Remove the menu item template block from the template before rendering
+    template = MENU_ITEM_TEMPLATE_PATTERN.sub('', template)
 
     html = template
     html = html.replace(
