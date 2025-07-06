@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omelette BRUNCH/早午餐菜單</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="menu-title">Omelette BRUNCH/早午餐菜單</h1>
+                <div class="supply-time">
+                    <i class="fas fa-clock"></i>
+                    <span id="supply-time">10:30-14:00</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav-container">
+                <button class="nav-btn active" data-section="categories">菜單分類</button>
+                <button class="nav-btn" data-section="set-options">套餐選項</button>
+                <button class="nav-btn" data-section="drinks">飲品</button>
+                <button class="nav-btn" data-section="contact">聯絡資訊</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Categories Section -->
+            <section id="categories" class="section active">
+                <div id="categories-container"></div>
+            </section>
+
+            <!-- Set Options Section -->
+            <section id="set-options" class="section">
+                <div class="section-header">
+                    <h2>套餐選項</h2>
+                    <p class="section-subtitle">升級您的餐點體驗</p>
+                </div>
+                <div id="set-options-container"></div>
+            </section>
+
+            <!-- Drinks Section -->
+            <section id="drinks" class="section">
+                <div class="section-header">
+                    <h2>飲品</h2>
+                    <p class="section-subtitle">精選飲品搭配</p>
+                </div>
+                <div id="drinks-container"></div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="section">
+                <div class="section-header">
+                    <h2>聯絡資訊</h2>
+                    <p class="section-subtitle">歡迎光臨</p>
+                </div>
+                <div id="contact-container"></div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div id="notes-container"></div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
