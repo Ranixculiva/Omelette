@@ -109,6 +109,34 @@ This project includes a Python script to automatically generate a styled brunch 
 - `script/generate_menu_html.py` — Python script to generate the final HTML
 - `html_for_figma/` — All generated HTML files will be placed here automatically
 
+### Template Placeholders & Customization
+
+#### Three-Column Category Layout
+The template now supports a three-column layout for menu categories. This is achieved by wrapping the `<!--CATEGORIES-->` placeholder in a flexbox container:
+
+```html
+<div style="display: flex; flex-wrap: wrap; gap: 24px;">
+  <!--CATEGORIES-->
+</div>
+```
+Each category block will automatically take up one third of the row (with `flex: 1 1 calc(33.333% - 24px); min-width: 320px;`).
+
+#### Customizing Menu Item Appearance
+You can define how each menu item (name/price row) appears by adding a template block in your HTML file, like this:
+
+```html
+<!--MENU_ITEM_TEMPLATE_START-->
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+  <span style="flex: 1; text-align: left;">{name}</span>
+  <span style="min-width: 48px; text-align: right;">{price}</span>
+</div>
+<!--MENU_ITEM_TEMPLATE_END-->
+```
+- The script will automatically extract this block and use it for all menu items.
+- Use `{name}` and `{price}` as placeholders.
+- You can freely adjust the style or structure in this block to change the look of all menu items.
+- If this block is not present, a default flexbox row will be used.
+
 ### Template Placeholders
 In your template HTML file, add the following HTML comments where you want each section to appear:
 
@@ -122,7 +150,9 @@ Example:
 ```html
 <body>
   ...
-  <!--CATEGORIES-->
+  <div style="display: flex; flex-wrap: wrap; gap: 24px;">
+    <!--CATEGORIES-->
+  </div>
   ...
   <!--SET_OPTIONS-->
   ...
@@ -131,6 +161,12 @@ Example:
   <!--CONTACT-->
   ...
   <!--NOTES-->
+  <!--MENU_ITEM_TEMPLATE_START-->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+    <span style="flex: 1; text-align: left;">{name}</span>
+    <span style="min-width: 48px; text-align: right;">{price}</span>
+  </div>
+  <!--MENU_ITEM_TEMPLATE_END-->
 </body>
 ```
 
@@ -151,7 +187,7 @@ Example:
 ### Notes
 - Do not edit the generated HTML directly; always update the JSON or template and re-run the script.
 - The script is modular and can be adapted for other menu JSON files or templates.
-- The template file should not contain any hardcoded menu data, only the required placeholders.
+- The template file should not contain any hardcoded menu data, only the required placeholders and (optionally) the menu item template block.
 
 ---
 

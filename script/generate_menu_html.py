@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+import re
 
 def list_template_options(folder):
     if not os.path.isdir(folder):
@@ -11,27 +12,41 @@ DATA_PATH = os.path.join('data', 'omelette_menu_brunch.json')
 TEMPLATE_DIR = 'template_for_figma'
 OUTPUT_DIR = 'html_for_figma'
 
-# Helper functions to generate HTML for each section
-def render_categories(categories):
+# Extract menu item template from HTML file
+MENU_ITEM_TEMPLATE_PATTERN = re.compile(r'<!--MENU_ITEM_TEMPLATE_START-->(.*?)<!--MENU_ITEM_TEMPLATE_END-->', re.DOTALL)
+DEFAULT_MENU_ITEM_TEMPLATE = (
+    '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">'
+    '<span style="flex: 1; text-align: left;">{name}</span>'
+    '<span style="min-width: 48px; text-align: right;">{price}</span>'
+    '</div>'
+)
+
+def extract_menu_item_template(template_html):
+    match = MENU_ITEM_TEMPLATE_PATTERN.search(template_html)
+    if match:
+        return match.group(1).strip()
+    return DEFAULT_MENU_ITEM_TEMPLATE
+
+def render_categories(categories, item_template):
     html = []
     for cat in categories:
-        html.append(f'<div style="flex: 1 1 320px; min-width: 320px;">')
+        html.append(f'<div style="flex: 1 1 calc(33.333% - 24px); min-width: 320px;">')
         h2_color = '#d94f2a' if cat.get('is_new') else '#3a7c6c'
         h2_extra = ''
         if cat.get('is_new'):
             h2_extra = ' <span style="font-size: 0.9rem; color: #d94f2a;">NEW</span>'
         html.append(f'<h2 style="color: {h2_color}; font-size: 1.2rem; margin-bottom: 8px;">{cat["title"]}{h2_extra}</h2>')
-        html.append('<ul style="margin: 0; padding-left: 18px;">')
         for item in cat['items']:
             name = item['name']
             price = item['price']
             is_recommended = item.get('is_recommended', False)
             is_new = item.get('is_new', False)
-            label = f'<b>{name} {price}</b>' if is_recommended else f'{name} {price}'
+            label = name
+            if is_recommended:
+                label = f'<b>{label}</b>'
             if is_new:
-                label = f'<span style="color: #d94f2a;">{name} {price} NEW</span>'
-            html.append(f'<li>{label}</li>')
-        html.append('</ul>')
+                label = f'<span style="color: #d94f2a;">{label} NEW</span>'
+            html.append(item_template.replace('{name}', label).replace('{price}', str(price)))
         if 'side_dish_options' in cat:
             html.append(f'<div style="font-size: 0.95rem; color: #888;">附餐({"、".join(cat["side_dish_options"])}，2選1)</div>')
         if 'note' in cat:
@@ -60,16 +75,16 @@ def render_set_options(set_options):
     html.append('</div>')
     return '\n'.join(html)
 
-def render_drinks(drinks):
+def render_drinks(drinks, item_template):
     html = []
     html.append('<h2 style="color: #3a7c6c; font-size: 1.2rem;">飲料系列</h2>')
-    html.append('<ul style="margin: 0; padding-left: 18px;">')
     for d in drinks:
+        name = d['name']
         temps = f'({"/".join(d["temperature"])})' if "temperature" in d else ''
         sizes = '、'.join([f'{s["label"]} {s["price"]}' for s in d['size']])
         notes = f' <span style="font-size: 0.9rem; color: #d94f2a;">{d["notes"]}</span>' if "notes" in d else ''
-        html.append(f'<li>{d["name"]} {temps} {sizes}{notes}</li>')
-    html.append('</ul>')
+        label = f'{name} {temps} {sizes}{notes}'
+        html.append(item_template.replace('{name}', label).replace('{price}', ''))
     return '\n'.join(html)
 
 def render_contact(contact, social):
@@ -117,12 +132,13 @@ def main():
     with open(template_path, encoding='utf-8') as f:
         template = f.read()
 
-    # Replace blocks in template
-    # You can add {{categories}}, {{set_options}}, {{drinks}}, {{contact}}, {{notes}} in the template for replacement
+    # Extract menu item template
+    item_template = extract_menu_item_template(template)
+
     html = template
     html = html.replace(
         '<!--CATEGORIES-->',
-        render_categories(data['categories'])
+        render_categories(data['categories'], item_template)
     )
     html = html.replace(
         '<!--SET_OPTIONS-->',
@@ -130,7 +146,7 @@ def main():
     )
     html = html.replace(
         '<!--DRINKS-->',
-        render_drinks(data['drinks'])
+        render_drinks(data['drinks'], item_template)
     )
     html = html.replace(
         '<!--CONTACT-->',
