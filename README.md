@@ -94,4 +94,65 @@ To add new sections:
 
 ## License
 
-This project is created for displaying menu information. Feel free to modify and use for your own restaurant menu needs. 
+This project is created for displaying menu information. Feel free to modify and use for your own restaurant menu needs.
+
+## Generating Menu HTML for Figma Import
+
+This project includes a Python script to automatically generate a styled brunch menu HTML file from structured JSON data. This is useful for keeping your menu up-to-date and for importing into Figma using html.to.design.
+
+### Prerequisites
+- Python 3.x installed
+
+### Folder Structure
+- `data/omelette_menu_brunch.json` — Menu data (edit this to update menu items)
+- `template_for_figma/brunch.html` — HTML template (should only contain placeholders, not hardcoded menu data)
+- `script/generate_menu_html.py` — Python script to generate the final HTML
+- `html_for_figma/` — All generated HTML files will be placed here automatically
+
+### Template Placeholders
+In your template HTML file, add the following HTML comments where you want each section to appear:
+
+- `<!--CATEGORIES-->` — All menu categories and items
+- `<!--SET_OPTIONS-->` — Set meal options
+- `<!--DRINKS-->` — Drinks menu
+- `<!--CONTACT-->` — Contact and social info
+- `<!--NOTES-->` — Restaurant notes and policies
+
+Example:
+```html
+<body>
+  ...
+  <!--CATEGORIES-->
+  ...
+  <!--SET_OPTIONS-->
+  ...
+  <!--DRINKS-->
+  ...
+  <!--CONTACT-->
+  ...
+  <!--NOTES-->
+</body>
+```
+
+### How to Generate the Menu HTML
+1. Make sure your menu data in `data/omelette_menu_brunch.json` is up to date.
+2. Ensure your template (e.g., `template_for_figma/brunch.html`) contains only the placeholders above and no hardcoded menu data.
+3. Open a terminal in the project root.
+4. Run the script:
+   
+   ```bash
+   python3 script/generate_menu_html.py
+   ```
+   - If there are any `.html` files in `template_for_figma/`, you will be prompted to select one by number.
+   - If there are no templates in that folder, you can enter a relative or absolute path to your template file.
+5. The generated HTML will always be saved in the `html_for_figma/` directory, with the filename based on your template's basename and `_generated.html` appended (e.g., `brunch.html` → `html_for_figma/brunch_generated.html`).
+6. You can now import this file into Figma using the html.to.design plugin.
+
+### Notes
+- Do not edit the generated HTML directly; always update the JSON or template and re-run the script.
+- The script is modular and can be adapted for other menu JSON files or templates.
+- The template file should not contain any hardcoded menu data, only the required placeholders.
+
+---
+
+For any issues or questions, please contact the project maintainer. 
