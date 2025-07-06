@@ -1,0 +1,512 @@
+{
+  "$schema": "omelette_menu.schema.json",
+  "menu_title": "Omelette BRUNCH/早午餐菜單",
+  "supply_time": "10:30-14:00",
+  "categories": [
+    {
+      "title": "漢堡套餐系列",
+      "items": [
+        {
+          "name": "原味起士牛肉堡",
+          "price": 120
+        },
+        {
+          "name": "番茄起士牛肉堡",
+          "price": 125
+        },
+        {
+          "name": "培根起士牛肉堡",
+          "price": 150
+        },
+        {
+          "name": "莎莎醬雞堡",
+          "price": 125,
+          "is_recommended": true
+        },
+        {
+          "name": "培根可樂餅蛋堡",
+          "price": 140
+        }
+      ],
+      "side_dish_options": [
+        "北海道可樂餅",
+        "鮮綠沙拉"
+      ],
+      "add_ons": [
+        {
+          "name": "美式生菜",
+          "price": 15
+        },
+        {
+          "name": "煎蛋",
+          "price": 15
+        },
+        {
+          "name": "墨西哥辣椒",
+          "price": 10
+        }
+      ],
+      "note": "漢堡不提供對切服務"
+    },
+    {
+      "title": "歐姆蛋捲拼盤系列",
+      "items": [
+        {
+          "name": "火腿歐姆蛋捲",
+          "price": 150
+        },
+        {
+          "name": "培根歐姆蛋捲",
+          "price": 170
+        },
+        {
+          "name": "德腸歐姆蛋捲",
+          "price": 175,
+          "is_recommended": true
+        },
+        {
+          "name": "鮮綠沙拉歐姆蛋捲",
+          "price": 185
+        },
+        {
+          "name": "松露野菇歐姆蛋捲",
+          "price": 190
+        },
+        {
+          "name": "牛肉排歐姆蛋捲",
+          "price": 195
+        }
+      ],
+      "note": "(蛋捲拼盤內含:薯餅、奶油餐包)",
+      "add_ons": [
+        {
+          "name": "升級莎莎醬",
+          "price": 15
+        }
+      ]
+    },
+    {
+      "title": "蛋包飯套餐系列",
+      "is_new": true,
+      "items": [
+        {
+          "name": "可樂餅打拋蛋包飯",
+          "price": 200
+        },
+        {
+          "name": "牛肉排打拋蛋包飯",
+          "price": 215
+        },
+        {
+          "name": "可樂餅松露野菇蛋包飯",
+          "price": 235,
+          "is_recommended": true
+        },
+        {
+          "name": "牛肉排松露野菇蛋包飯",
+          "price": 250
+        }
+      ],
+      "note": "(蛋包飯系列内含 鮮緑沙拉1份)"
+    },
+    {
+      "title": "帕瑪森肉醬麵系列",
+      "items": [
+        {
+          "name": "肉醬義大利麵",
+          "price": 100
+        },
+        {
+          "name": "瑞典肉丸肉醬義大利麵",
+          "price": 145
+        },
+        {
+          "name": "牛肉排肉醬義大利麵",
+          "price": 145
+        }
+      ],
+      "note": "(肉醬麵系列内含 半熟荷包蛋，如需全熟請提早告知)"
+    },
+    {
+      "title": "奶油煎吐司套餐系列",
+      "items": [
+        {
+          "name": "起士蛋奶油煎吐司",
+          "price": 125
+        },
+        {
+          "name": "火腿起士蛋奶油煎吐司",
+          "price": 135,
+          "is_recommended": true
+        },
+        {
+          "name": "培根起士蛋奶油煎吐司",
+          "price": 150
+        },
+        {
+          "name": "鮪魚起士蛋奶油煎吐司",
+          "price": 150
+        }
+      ],
+      "side_dish_options": [
+        "北海道可樂餅",
+        "鮮綠沙拉"
+      ]
+    },
+    {
+      "title": "美式炒蛋小拼盤系列",
+      "items": [
+        {
+          "name": "香煎火腿",
+          "price": 100
+        },
+        {
+          "name": "美式培根",
+          "price": 120,
+          "is_recommended": true
+        },
+        {
+          "name": "德式香腸",
+          "price": 125
+        },
+        {
+          "name": "鮮綠沙拉",
+          "price": 135
+        },
+        {
+          "name": "松露野菇",
+          "price": 140,
+          "is_new": true
+        },
+        {
+          "name": "煎牛肉排",
+          "price": 145
+        }
+      ],
+      "note": "(炒蛋拼盤內含 薯餅、奶油餐包)"
+    },
+    {
+      "title": "輕食主義套餐系列",
+      "items": [
+        {
+          "name": "港式蘿蔔糕加煎蛋",
+          "price": 105
+        },
+        {
+          "name": "蜂蜜法國吐司",
+          "price": 105
+        },
+        {
+          "name": "鮪魚薯泥吐司",
+          "price": 110
+        }
+      ],
+      "side_dish_options": [
+        "北海道可樂餅",
+        "鮮綠沙拉"
+      ]
+    },
+    {
+      "title": "單點系列",
+      "items": [
+        {
+          "name": "荷包蛋",
+          "options": [
+            "半熟",
+            "全熟"
+          ],
+          "price": 15
+        },
+        {
+          "name": "奶油麵包(1片)",
+          "price": 25
+        },
+        {
+          "name": "薯餅(1片)",
+          "price": 30
+        },
+        {
+          "name": "培根(1片)",
+          "price": 30
+        },
+        {
+          "name": "北海道可樂餅(1片)",
+          "price": 40
+        },
+        {
+          "name": "德式香腸(1根)",
+          "price": 35
+        },
+        {
+          "name": "雞塊(5塊)",
+          "price": 50
+        },
+        {
+          "name": "牛肉排(1片)",
+          "price": 55
+        },
+        {
+          "name": "鮮綠沙拉(限量供應)",
+          "price": 45
+        },
+        {
+          "name": "牛乳(200ml)",
+          "price": 35
+        },
+        {
+          "name": "手工冷凍香蒜麵包(1條)",
+          "price": 200
+        }
+      ]
+    }
+  ],
+  "set_options": {
+    "items": [
+      {
+        "name": "A",
+        "extra_price": 20,
+        "content": [
+          "任選25元飲品"
+        ],
+        "save": 5
+      },
+      {
+        "name": "B",
+        "extra_price": 45,
+        "content": [
+          "薯餅1片",
+          "任選25元飲品"
+        ],
+        "save": 10
+      },
+      {
+        "name": "C",
+        "extra_price": 65,
+        "content": [
+          "雞塊5塊",
+          "任選25元飲品"
+        ],
+        "save": 10
+      },
+      {
+        "name": "D",
+        "extra_price": 80,
+        "content": [
+          "德式香腸2根",
+          "任選25元飲品"
+        ],
+        "save": 15
+      }
+    ],
+    "notes": [
+      "單點系列不計入套餐優惠",
+      "飲品配餐超額可補差價"
+    ]
+  },
+  "drinks": [
+    {
+      "name": "紅茶",
+      "temperature": [
+        "冰",
+        "溫",
+        "熱"
+      ],
+      "size": [
+        {
+          "label": "L",
+          "price": 25
+        }
+      ]
+    },
+    {
+      "name": "紅茶(無糖)",
+      "temperature": [
+        "溫",
+        "熱"
+      ],
+      "size": [
+        {
+          "label": "L",
+          "price": 25
+        }
+      ]
+    },
+    {
+      "name": "冷泡茶(無糖)",
+      "temperature": [
+        "冰"
+      ],
+      "size": [
+        {
+          "label": "L",
+          "price": 25
+        }
+      ]
+    },
+    {
+      "name": "綠茶(無糖)",
+      "temperature": [
+        "溫",
+        "熱"
+      ],
+      "size": [
+        {
+          "label": "L",
+          "price": 25
+        }
+      ]
+    },
+    {
+      "name": "冷泡紅茶(無糖)",
+      "temperature": [
+        "冰"
+      ],
+      "size": [
+        {
+          "label": "L",
+          "price": 30
+        }
+      ]
+    },
+    {
+      "name": "豆漿(微糖)",
+      "temperature": [
+        "冰",
+        "溫",
+        "熱"
+      ],
+      "size": [
+        {
+          "label": "L",
+          "price": 30
+        }
+      ]
+    },
+    {
+      "name": "奶茶",
+      "temperature": [
+        "冰",
+        "溫",
+        "熱"
+      ],
+      "size": [
+        {
+          "label": "L",
+          "price": 30
+        }
+      ]
+    },
+    {
+      "name": "鮮奶茶",
+      "temperature": [
+        "冰",
+        "溫",
+        "熱"
+      ],
+      "size": [
+        {
+          "label": "M",
+          "price": 45
+        }
+      ]
+    },
+    {
+      "name": "鮮奶茶(無糖)",
+      "temperature": [
+        "冰",
+        "熱"
+      ],
+      "size": [
+        {
+          "label": "M",
+          "price": 45
+        }
+      ]
+    },
+    {
+      "name": "美式咖啡",
+      "temperature": [
+        "冰",
+        "熱"
+      ],
+      "size": [
+        {
+          "label": "M",
+          "price": 45
+        }
+      ]
+    },
+    {
+      "name": "拿鐵咖啡",
+      "temperature": [
+        "冰",
+        "熱"
+      ],
+      "size": [
+        {
+          "label": "M",
+          "price": 60
+        }
+      ]
+    },
+    {
+      "name": "可可牛奶",
+      "temperature": [
+        "冰",
+        "溫",
+        "熱"
+      ],
+      "size": [
+        {
+          "label": "M",
+          "price": 60
+        }
+      ]
+    },
+    {
+      "name": "抹茶牛奶",
+      "temperature": [
+        "冰",
+        "溫",
+        "熱"
+      ],
+      "size": [
+        {
+          "label": "M",
+          "price": 60
+        }
+      ]
+    },
+    {
+      "name": "榛果拿鐵咖啡",
+      "temperature": [
+        "冰",
+        "熱"
+      ],
+      "size": [
+        {
+          "label": "M",
+          "price": 70
+        }
+      ],
+      "notes": "+咖啡濃縮 10元"
+    }
+  ],
+  "notes": [
+    "本店為寵物友善餐廳",
+    "本店内用禁帶外食",
+    "特殊休假會於月初前公告",
+    "國定假日休息不營業",
+    "歡迎客製餐盒 和 晚間包場尋問"
+  ],
+  "contact": {
+    "address": "新店區寶強路53號",
+    "phone": "02-2911-3581"
+  },
+  "social": [
+    {
+      "platform": "Facebook",
+      "name": "Omelette 美式蛋捲"
+    }
+  ]
+}
