@@ -8,11 +8,10 @@ def list_template_options(folder):
         return []
     return [f for f in os.listdir(folder) if f.endswith('.html') and os.path.isfile(os.path.join(folder, f))]
 
-DATA_PATH = os.path.join('data', 'omelette_menu_brunch.json')
 TEMPLATE_DIR = 'template_for_figma'
 OUTPUT_DIR = 'html_for_figma'
+DEFAULT_DATA_PATH = os.path.join('data', 'omelette_menu_brunch.json')
 
-# Extract menu item template from HTML file
 MENU_ITEM_TEMPLATE_PATTERN = re.compile(r'<!--MENU_ITEM_TEMPLATE_START-->(.*?)<!--MENU_ITEM_TEMPLATE_END-->', re.DOTALL)
 DEFAULT_MENU_ITEM_TEMPLATE = (
     '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">'
@@ -126,8 +125,14 @@ def main():
             sys.exit(1)
     base = os.path.splitext(os.path.basename(template_path))[0]
     output_path = os.path.join(OUTPUT_DIR, f'{base}_generated.html')
+    data_path = os.path.join('data', f'{base}.json')
+    if os.path.isfile(data_path):
+        print(f'Using data file: {data_path}')
+    else:
+        print(f'Warning: {data_path} not found. Falling back to {DEFAULT_DATA_PATH}')
+        data_path = DEFAULT_DATA_PATH
 
-    with open(DATA_PATH, encoding='utf-8') as f:
+    with open(data_path, encoding='utf-8') as f:
         data = json.load(f)
     with open(template_path, encoding='utf-8') as f:
         template = f.read()
