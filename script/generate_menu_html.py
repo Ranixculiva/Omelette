@@ -38,9 +38,12 @@ def render_categories(categories, item_template):
         for item in cat['items']:
             name = item['name']
             price = item['price']
+            options = item.get('options')
             is_recommended = item.get('is_recommended', False)
             is_new = item.get('is_new', False)
             label = name
+            if options:
+                label += f' ({"/".join(options)})'
             if is_recommended:
                 label = f'<b>{label}</b>'
             if is_new:

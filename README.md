@@ -77,6 +77,32 @@ To add new sections:
 3. Add corresponding JavaScript functions in `script.js`
 4. Style the new section in `styles.css`
 
+### Customizing Menu Item Appearance
+You can define how each menu item (name/price row) appears by adding a template block in your HTML file, like this:
+
+```html
+<!--MENU_ITEM_TEMPLATE_START-->
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+  <span style="flex: 1; text-align: left;">{name}</span>
+  <span style="min-width: 48px; text-align: right;">{price}</span>
+</div>
+<!--MENU_ITEM_TEMPLATE_END-->
+```
+- The script will automatically extract this block and use it for all menu items.
+- Use `{name}` and `{price}` as placeholders.
+- If an item has an `options` array, it will be rendered as a parenthetical list after the name (e.g., 荷包蛋 (半熟/全熟)).
+- You can freely adjust the style or structure in this block to change the look of all menu items.
+- If this block is not present, a default flexbox row will be used.
+
+#### Example JSON with Options
+```json
+{
+  "name": "荷包蛋",
+  "options": ["半熟", "全熟"],
+  "price": 15
+}
+```
+
 ## Features Included
 
 - **Special Badges**: "新品" (New) and "推薦" (Recommended) badges for highlighted items
@@ -135,8 +161,18 @@ You can define how each menu item (name/price row) appears by adding a template 
 ```
 - The script will automatically extract this block and use it for all menu items.
 - Use `{name}` and `{price}` as placeholders.
+- If an item has an `options` array, it will be rendered as a parenthetical list after the name (e.g., 荷包蛋 (半熟/全熟)).
 - You can freely adjust the style or structure in this block to change the look of all menu items.
 - If this block is not present, a default flexbox row will be used.
+
+#### Example JSON with Options
+```json
+{
+  "name": "荷包蛋",
+  "options": ["半熟", "全熟"],
+  "price": 15
+}
+```
 
 ### Template Placeholders
 In your template HTML file, add the following HTML comments where you want each section to appear:

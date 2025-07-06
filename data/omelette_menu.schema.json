@@ -21,7 +21,8 @@
                 "options": {
                   "type": "array",
                   "items": { "type": "string" },
-                  "nullable": true
+                  "nullable": true,
+                  "description": "Optional. If present, will be rendered as a parenthetical list after the item name, e.g. 荷包蛋 (半熟/全熟)."
                 },
                 "is_new": { "type": "boolean" },
                 "is_recommended": { "type": "boolean" }
