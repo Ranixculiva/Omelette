@@ -20,11 +20,28 @@ DEFAULT_MENU_ITEM_TEMPLATE = (
     '</div>'
 )
 
+DRINK_ITEM_TEMPLATE_PATTERN = re.compile(r'<!--DRINK_ITEM_TEMPLATE_START-->(.*?)<!--DRINK_ITEM_TEMPLATE_END-->', re.DOTALL)
+DEFAULT_DRINK_ITEM_TEMPLATE = (
+    '<div style="display: flex; align-items: center; margin-bottom: 2px;">'
+    '<span style="flex: 2; text-align: left;">{name}</span>'
+    '<span style="flex: 1; text-align: left;">{temperature}</span>'
+    '<span style="flex: 1; text-align: left;">{size}</span>'
+    '<span style="flex: 1; text-align: right;">{price}</span>'
+    '</div>'
+    '{note}'
+)
+
 def extract_menu_item_template(template_html):
     match = MENU_ITEM_TEMPLATE_PATTERN.search(template_html)
     if match:
         return match.group(1).strip()
     return DEFAULT_MENU_ITEM_TEMPLATE
+
+def extract_drink_item_template(template_html):
+    match = DRINK_ITEM_TEMPLATE_PATTERN.search(template_html)
+    if match:
+        return match.group(1).strip()
+    return DEFAULT_DRINK_ITEM_TEMPLATE
 
 def render_categories(categories, item_template):
     html = []
@@ -77,16 +94,31 @@ def render_set_options(set_options):
     html.append('</div>')
     return '\n'.join(html)
 
-def render_drinks(drinks, item_template):
+def render_drinks(drinks, item_template, drink_item_template):
     html = []
     html.append('<h2 style="color: #3a7c6c; font-size: 1.2rem;">飲料系列</h2>')
+    # Header row
+    html.append('<div style="display: flex; font-weight: bold; margin-bottom: 4px;">'
+                '<span style="flex: 2; text-align: left;">品項</span>'
+                '<span style="flex: 1; text-align: left;">溫度</span>'
+                '<span style="flex: 1; text-align: left;">容量</span>'
+                '<span style="flex: 1; text-align: right;">價格</span>'
+                '</div>')
     for d in drinks:
         name = d['name']
-        temps = f'({"/".join(d["temperature"])})' if "temperature" in d else ''
-        sizes = '、'.join([f'{s["label"]} {s["price"]}' for s in d['size']])
-        notes = f' <span style="font-size: 0.9rem; color: #d94f2a;">{d["notes"]}</span>' if "notes" in d else ''
-        label = f'{name} {temps} {sizes}{notes}'
-        html.append(item_template.replace('{name}', label).replace('{price}', ''))
+        temperature = '/'.join(d['temperature']) if 'temperature' in d else ''
+        size = '、'.join([s['label'] for s in d['size']])
+        price = '、'.join([str(s['price']) for s in d['size']])
+        note = d.get('notes')
+        note_html = ''
+        if note:
+            note_html = f'<div style="text-align: right; color: #d94f2a; font-size: 0.95rem;">{note}</div>'
+        row = drink_item_template.replace('{name}', name)
+        row = row.replace('{temperature}', temperature)
+        row = row.replace('{size}', size)
+        row = row.replace('{price}', price)
+        row = row.replace('{note}', note_html)
+        html.append(row)
     return '\n'.join(html)
 
 def render_contact(contact, social):
@@ -145,6 +177,10 @@ def main():
     # Remove the menu item template block from the template before rendering
     template = MENU_ITEM_TEMPLATE_PATTERN.sub('', template)
 
+    drink_item_template = extract_drink_item_template(template)
+    # Remove the drink item template block from the template before rendering
+    template = DRINK_ITEM_TEMPLATE_PATTERN.sub('', template)
+
     html = template
     html = html.replace(
         '<!--MENU_TITLE-->',
@@ -164,7 +200,7 @@ def main():
     )
     html = html.replace(
         '<!--DRINKS-->',
-        render_drinks(data['drinks'], item_template)
+        render_drinks(data['drinks'], item_template, drink_item_template)
     )
     html = html.replace(
         '<!--CONTACT-->',
