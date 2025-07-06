@@ -147,6 +147,14 @@ def main():
 
     html = template
     html = html.replace(
+        '<!--MENU_TITLE-->',
+        data.get('menu_title', '')
+    )
+    html = html.replace(
+        '<!--SUPPLY_TIME-->',
+        data.get('supply_time', '')
+    )
+    html = html.replace(
         '<!--CATEGORIES-->',
         render_categories(data['categories'], item_template)
     )
