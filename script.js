@@ -9,7 +9,6 @@ const setOptionsContainer = document.getElementById('set-options-container');
 const drinksContainer = document.getElementById('drinks-container');
 const contactContainer = document.getElementById('contact-container');
 const notesContainer = document.getElementById('notes-container');
-const supplyTimeElement = document.getElementById('supply-time');
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', async () => {
@@ -52,9 +51,10 @@ function populateHeader() {
         }
     }
     
-    if (menuData.supply_time) {
-        supplyTimeElement.textContent = menuData.supply_time;
-    }
+    // Supply time is no longer displayed in the new header design
+    // if (menuData.supply_time && supplyTimeElement) {
+    //     supplyTimeElement.textContent = menuData.supply_time;
+    // }
 }
 
 // Populate categories section
